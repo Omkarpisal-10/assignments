@@ -5,8 +5,17 @@
   Once you've implemented the logic, test your code by running
 */
 
-function countVowels(str) {
-    // Your code here
+function countVowels(testString) {
+  let numberOfVowels = 0;
+  vowelsArray = ['a', 'e', 'i', 'o', 'u'];
+  testString = testString.toLowerCase();
+  indexes1 = testString.length;
+  for (let i = 0; i < indexes1; i++) {
+    if (vowelsArray.includes(testString[i])) {
+      numberOfVowels++;
+    }
+  }
+  return numberOfVowels;
 }
 
 module.exports = countVowels;
