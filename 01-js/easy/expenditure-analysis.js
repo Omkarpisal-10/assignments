@@ -15,28 +15,29 @@
 
 
 function calculateTotalSpentByCategory(transactions) {
-  // Create an object to store total spending for each category
+  // Create an object to store the total spending for each category
   const categoryTotalMap = {};
 
-  // Iterate through each transaction
-  transactions.forEach((transaction) => {
-    const { category, price } = transaction;
+  // Iterate through each transaction using a traditional for loop
+  for (let i = 0; i < transactions.length; i++) {
+    // Destructure the transaction object to get category and price
+    const { category, price } = transactions[i];
 
     // If the category is not in the map, add it with the current transaction's price
-    if (!categoryTotalMap[category]) {
-      categoryTotalMap[category] = price;
-    } else {
-      // If the category is already in the map, add the current transaction's price to the total
-      categoryTotalMap[category] += price;
-    }
-  });
+    // If the category is already in the map, add the current transaction's price to the total
+    categoryTotalMap[category] = (categoryTotalMap[category] || 0) + price;
+  }
 
-  // Convert the object into an array of objects with category and totalSpent properties
-  const result = Object.keys(categoryTotalMap).map((category) => ({
-    category,
-    totalSpent: categoryTotalMap[category],
-  }));
+  // Create an array to store the result
+  const result = [];
 
+  // Iterate through the keys of categoryTotalMap using a for...of loop
+  for (const category of Object.keys(categoryTotalMap)) {
+    // Push an object with category and totalSpent properties into the result array
+    result.push({ category, totalSpent: categoryTotalMap[category] });
+  }
+
+  // Return the final result array
   return result;
 }
 
@@ -65,8 +66,12 @@ const transactions = [
   },
 ];
 
+// Call the function with the example transactions
 const result = calculateTotalSpentByCategory(transactions);
+
+// Log the result to the console
 console.log(result);
+
 
 
 module.exports = calculateTotalSpentByCategory;
